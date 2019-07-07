@@ -24,6 +24,7 @@ private:
     Ui::MainWindow *ui;
     int currentPage;
     int totalPage;
+    void turnToPage(int page);
 };
 
 #endif // MAINWINDOW_H

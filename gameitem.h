@@ -19,14 +19,12 @@ class GameItem : public QWidget
     Q_OBJECT
 
 public:
-    explicit GameItem(QWidget *parent = nullptr, QString info="") ;
+    explicit GameItem(QWidget *parent = nullptr, GameInfo info={}) ;
     ~GameItem();
 
 private:
     Ui::GameItem *ui;
-    int gameID;
-    QString swfURL;
-    QString picURL;
+    GameInfo info;
 
 };
 
