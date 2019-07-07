@@ -73,11 +73,15 @@
   <widget class="QPushButton" name="pushButton">
    <property name="geometry">
     <rect>
-     <x>30</x>
+     <x>20</x>
      <y>145</y>
-     <width>81</width>
+     <width>101</width>
      <height>30</height>
     </rect>
+   </property>
+   <property name="styleSheet">
+    <string notr="true">background-color: rgb(71, 142, 213);
+color: rgb(255, 255, 255);</string>
    </property>
    <property name="text">
     <string>PushButton</string>

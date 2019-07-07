@@ -25,6 +25,9 @@ private:
     GameInfo info;
     bool swf_exists;
     QDir FlashBox_Dir;
+    QString pic_path;
+    QString swf_path;
+    void refresh();
 };
 
 #endif // GAMEITEM_H
