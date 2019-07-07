@@ -14,8 +14,37 @@ GameItem::GameItem(QWidget *parent, GameInfo info): QWidget(parent), ui(new Ui::
     // set path
     FlashBox_Dir = QDir::home();
     FlashBox_Dir.cd("FlashBox");
-    pic_path = FlashBox_Dir.filePath(QString::number(info.ID) + ".jpg");
-    swf_path = FlashBox_Dir.filePath(QString::number(info.ID) + ".swf");
+    pic_path = FlashBox_Dir.filePath("cached/" + info.name + ".jpg");
+    swf_path = FlashBox_Dir.filePath("games/" + info.name + ".swf");
+    // picture exist ?
+    QFile pic(pic_path);
+    if (pic.exists())
+    {
+        ui->pictureBox->setScaledContents(true);
+        ui->pictureBox->setPixmap(QPixmap(pic_path));
+    }
+    else
+    {
+        // download picture
+    }
+    // swf exist ?
+    QFile swf(swf_path);
+    if (swf.exists())
+    {
+        swf_exists = true;
+        ui->pushButton->setText("Open");
+        ui->pushButton->setStyleSheet("background-color: rgb(0, 120, 0);color: rgb(255, 255, 255);");
+    }
+    else
+    {
+        swf_exists = false;
+        ui->pushButton->setText("Download");
+        ui->pushButton->setStyleSheet("background-color: rgb(71, 142, 213);;color: rgb(255, 255, 255);");
+    }
+}
+
+void GameItem::refresh()
+{
     // picture exist ?
     QFile pic(pic_path);
     if (pic.exists())
@@ -38,7 +67,6 @@ GameItem::GameItem(QWidget *parent, GameInfo info): QWidget(parent), ui(new Ui::
         ui->pushButton->setStyleSheet("background-color: rgb(71, 142, 213);;color: rgb(255, 255, 255);");
     }
 }
-
 GameItem::~GameItem()
 {
     delete ui;
@@ -53,5 +81,9 @@ void GameItem::on_pushButton_clicked()
         args.append(swf_path);
         proc->start("./flashplayer", args);
         //proc->waitForFinished();
+    }
+    else
+    {
+        // download swf
     }
 }
