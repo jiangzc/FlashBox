@@ -6,6 +6,7 @@ GameItem::GameItem(QWidget *parent, GameInfo info): QWidget(parent), ui(new Ui::
     ui->setupUi(this);
     this->info = info;
     ui->gameName->setText(info.name);
+    ui->progressBar->setVisible(false);
 
 }
 

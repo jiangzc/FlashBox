@@ -8,7 +8,7 @@
 #include <QtDebug>
 #include <cmath>
 
-const int GAME_PER_PAGE = 7;
+const int GAME_PER_PAGE = 5;
 static GameItem *GameList[GAME_PER_PAGE];
 static QWidget *BlankWidget[GAME_PER_PAGE];
 extern QVector<GameInfo> buff;
@@ -30,9 +30,6 @@ MainWindow::MainWindow(QWidget *parent) : QMainWindow(parent), ui(new Ui::MainWi
         BlankWidget[i] = new QWidget();
     }
     turnToPage(1);
-
-
-
 }
 
 MainWindow::~MainWindow()
