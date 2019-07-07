@@ -11,8 +11,7 @@
 const int ROW = 3;
 const int COL = 4;
 const int GAME_PER_PAGE = ROW * COL;
-static GameItem *GameList[GAME_PER_PAGE];
-static QWidget *BlankWidget[GAME_PER_PAGE];
+
 extern QVector<QVector<GameInfo>> buff;
 
 

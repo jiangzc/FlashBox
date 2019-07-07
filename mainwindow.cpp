@@ -16,8 +16,14 @@ MainWindow::MainWindow(QWidget *parent) : QMainWindow(parent), ui(new Ui::MainWi
 {
     ui->setupUi(this);
     ReadSourceFile("./source.txt");
-    GameGird *g1  = new GameGird(ui->tab_3, 1);
-    g1->show();
+    for (int i = 0; i < gamesType.size(); i++)
+    {
+        QWidget *widget = new QWidget();
+        GameGird *g  = new GameGird(widget, i);
+        ui->tabWidget->addTab(widget, gamesType[i]);
+    }
+    //GameGird *g1  = new GameGird(ui->tab_3, 1);
+
 
 }
 

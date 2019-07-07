@@ -2,6 +2,7 @@
 #define GAMEGIRD_H
 
 #include <QWidget>
+#include <gameitem.h>
 
 namespace Ui {
 class GameGird;
@@ -26,6 +27,8 @@ private:
     int totalPage;
     int gameType;
     void turnToPage(int page);
+    GameItem *GameList[12];
+    QWidget *BlankWidget[12];
 };
 
 #endif // GAMEGIRD_H
