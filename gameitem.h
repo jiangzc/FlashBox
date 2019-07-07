@@ -3,13 +3,7 @@
 
 #include <QWidget>
 #include <QDir>
-
-struct GameInfo {
-    int ID;
-    QString name;
-    QString swfURL;
-    QString picURL;
-};
+#include <game.h>
 
 namespace Ui {
 class GameItem;

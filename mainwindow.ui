@@ -6,52 +6,31 @@
    <rect>
     <x>0</x>
     <y>0</y>
-    <width>861</width>
-    <height>588</height>
+    <width>670</width>
+    <height>634</height>
    </rect>
   </property>
   <property name="windowTitle">
    <string>FlashBox</string>
   </property>
   <widget class="QWidget" name="centralWidget">
-   <layout class="QVBoxLayout" name="verticalLayout_3">
+   <layout class="QVBoxLayout" name="verticalLayout">
     <item>
-     <layout class="QVBoxLayout" name="verticalLayout_2" stretch="0,0">
-      <item>
-       <layout class="QVBoxLayout" name="verticalLayout"/>
-      </item>
-      <item>
-       <layout class="QHBoxLayout" name="horizontalLayout" stretch="5,1,5">
-        <item alignment="Qt::AlignRight">
-         <widget class="QPushButton" name="pushButton">
-          <property name="text">
-           <string>PageUp</string>
-          </property>
-         </widget>
-        </item>
-        <item alignment="Qt::AlignHCenter">
-         <widget class="QLabel" name="label">
-          <property name="sizePolicy">
-           <sizepolicy hsizetype="Preferred" vsizetype="Preferred">
-            <horstretch>0</horstretch>
-            <verstretch>0</verstretch>
-           </sizepolicy>
-          </property>
-          <property name="text">
-           <string>1</string>
-          </property>
-         </widget>
-        </item>
-        <item alignment="Qt::AlignLeft">
-         <widget class="QPushButton" name="pushButton_2">
-          <property name="text">
-           <string>PageDown</string>
-          </property>
-         </widget>
-        </item>
-       </layout>
-      </item>
-     </layout>
+     <widget class="QTabWidget" name="tabWidget">
+      <property name="currentIndex">
+       <number>1</number>
+      </property>
+      <widget class="QWidget" name="tab_3">
+       <attribute name="title">
+        <string>Tab 1</string>
+       </attribute>
+      </widget>
+      <widget class="QWidget" name="tab_4">
+       <attribute name="title">
+        <string>Tab 2</string>
+       </attribute>
+      </widget>
+     </widget>
     </item>
    </layout>
   </widget>

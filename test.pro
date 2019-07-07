@@ -28,15 +28,19 @@ SOURCES += \
         main.cpp \
         mainwindow.cpp \
     gameitem.cpp \
-    readsourcefile.cpp
+    gamegird.cpp \
+    tools.cpp
 
 HEADERS += \
         mainwindow.h \
-    gameitem.h
+    gameitem.h \
+    gamegird.h \
+    game.h
 
 FORMS += \
         mainwindow.ui \
-    gameitem.ui
+    gameitem.ui \
+    gamegird.ui
 
 # Default rules for deployment.
 qnx: target.path = /tmp/$${TARGET}/bin
