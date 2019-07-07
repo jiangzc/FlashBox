@@ -3,7 +3,9 @@
 
 #include <QWidget>
 #include <gameitem.h>
-
+const int ROW = 3;
+const int COL = 4;
+const int GAME_PER_PAGE = ROW * COL;
 namespace Ui {
 class GameGird;
 }

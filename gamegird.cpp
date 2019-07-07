@@ -8,9 +8,7 @@
 #include <QtDebug>
 #include <cmath>
 
-const int ROW = 3;
-const int COL = 4;
-const int GAME_PER_PAGE = ROW * COL;
+
 
 extern QVector<QVector<GameInfo>> buff;
 
