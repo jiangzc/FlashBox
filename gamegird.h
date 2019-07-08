@@ -4,7 +4,7 @@
 #include <QWidget>
 #include <gameitem.h>
 const int ROW = 3;
-const int COL = 4;
+const int COL = 6;
 const int GAME_PER_PAGE = ROW * COL;
 namespace Ui {
 class GameGird;
@@ -29,8 +29,8 @@ private:
     int totalPage;
     int gameType;
     void turnToPage(int page);
-    GameItem *GameList[12];
-    QWidget *BlankWidget[12];
+    GameItem *GameList[GAME_PER_PAGE];
+    QWidget *BlankWidget[GAME_PER_PAGE];
 };
 
 #endif // GAMEGIRD_H
