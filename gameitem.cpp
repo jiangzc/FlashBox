@@ -4,6 +4,7 @@
 #include <QFile>
 #include <QPixmap>
 #include <QProcess>
+#include <QtNetwork>
 
 /*
  * Find a memory leak problem when setting StyleSheet of buttons:
@@ -31,13 +32,14 @@ GameItem::GameItem(QWidget *parent, GameInfo info): QWidget(parent), ui(new Ui::
     swf_path = FlashBox_Dir.filePath("games/" + info.name + ".swf");
     // picture exist ?
     QFile pic(pic_path);
+    ui->pictureBox->setScaledContents(true);
     if (pic.exists())
     {
-        ui->pictureBox->setScaledContents(true);
         ui->pictureBox->setPixmap(QPixmap(pic_path));
     }
     else
     {
+        ui->pictureBox->setPixmap(QPixmap("./loading.jpeg"));
         // download picture
     }
     // swf exist ?
@@ -45,14 +47,22 @@ GameItem::GameItem(QWidget *parent, GameInfo info): QWidget(parent), ui(new Ui::
     if (swf.exists())
     {
         swf_exists = true;
-        ui->pushButton->setIcon(QIcon(QPixmap("./open.png")));
-
+        ui->pushButton->setText("Open");
     }
     else
     {
         swf_exists = false;
-        ui->pushButton->setIcon(QIcon(QPixmap("./download.png")));
+        ui->pushButton->setText("Download");
     }
+    // swf downloading ?
+    if (QFile::exists(FlashBox_Dir.filePath("cached/" + info.name + ".download")))
+    {
+        ui->pushButton->setText("Loading");
+        ui->pushButton->setEnabled(false);
+    }
+
+
+
 }
 
 void GameItem::refresh()
