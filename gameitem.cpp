@@ -4,6 +4,13 @@
 #include <QFile>
 #include <QPixmap>
 #include <QProcess>
+//#include <QColorGroup>
+
+// Find a memory leak problem when setting StyleSheet of button:
+// please refer to urls below
+// https://forum.qt.io/topic/72195/memory-leak-problem
+// https://bugreports.qt.io/browse/QTBUG-17151
+// https://bugreports.qt.io/browse/QTBUG-56492
 
 GameItem::GameItem(QWidget *parent, GameInfo info): QWidget(parent), ui(new Ui::GameItem)
 {
@@ -33,13 +40,14 @@ GameItem::GameItem(QWidget *parent, GameInfo info): QWidget(parent), ui(new Ui::
     {
         swf_exists = true;
         ui->pushButton->setText("Open");
-        ui->pushButton->setStyleSheet("background-color: rgb(0, 120, 0);color: rgb(255, 255, 255);");
+        //ui->pushButton->setStyleSheet("background-color: rgb(0, 120, 0);color: rgb(255, 255, 255);");
+
     }
     else
     {
         swf_exists = false;
         ui->pushButton->setText("Download");
-        ui->pushButton->setStyleSheet("background-color: rgb(71, 142, 213);;color: rgb(255, 255, 255);");
+        //ui->pushButton->setStyleSheet("background-color: rgb(71, 142, 213);;color: rgb(255, 255, 255);");
     }
 }
 
@@ -58,13 +66,13 @@ void GameItem::refresh()
     {
         swf_exists = true;
         ui->pushButton->setText("Open");
-        ui->pushButton->setStyleSheet("background-color: rgb(0, 120, 0);color: rgb(255, 255, 255);");
+        //ui->pushButton->setStyleSheet("background-color: rgb(0, 120, 0);color: rgb(255, 255, 255);");
     }
     else
     {
         swf_exists = false;
         ui->pushButton->setText("Download");
-        ui->pushButton->setStyleSheet("background-color: rgb(71, 142, 213);;color: rgb(255, 255, 255);");
+        //ui->pushButton->setStyleSheet("background-color: rgb(71, 142, 213);;color: rgb(255, 255, 255);");
     }
 }
 GameItem::~GameItem()
