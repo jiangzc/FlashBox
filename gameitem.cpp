@@ -7,12 +7,13 @@
 
 /*
  * Find a memory leak problem when setting StyleSheet of buttons:
- * please refer to the urls below
- * https://forum.qt.io/topic/72195/memory-leak-problem
- * https://bugreports.qt.io/browse/QTBUG-17151
- * https://bugreports.qt.io/browse/QTBUG-56492
+ * Please refer to the urls below
+ * > https://forum.qt.io/topic/72195/memory-leak-problem
+ * > https://bugreports.qt.io/browse/QTBUG-17151
+ * > https://bugreports.qt.io/browse/QTBUG-56492
+ *
  * My solution is using QIcon(QPixmap("path")).
- * https://stackoverflow.com/a/55530863
+ * > https://stackoverflow.com/a/55530863
  * If you have better solution, please pull request.
  */
 
