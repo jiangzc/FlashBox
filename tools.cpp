@@ -1,6 +1,8 @@
 #include <QFile>
+#include <QDir>
 #include <QVector>
 #include <QTextStream>
+#include <QtDebug>
 #include "game.h"
 
 QVector<QVector<GameInfo>> buff;
@@ -28,5 +30,33 @@ void ReadSourceFile(QString path) // relative path
         info.picURL = in.readLine();
         info.swfURL = in.readLine();
         buff[info.type].append(info);
+    }
+}
+
+void checkFiles()
+{
+    if (!QFile::exists("./flashplayer"))
+        qDebug() << "Not Found: flashplayer";
+    if (!QFile::exists("./source.txt"))
+        qDebug() << "Not Found: ./source.txt";
+    // FlashBox Dir exist ?
+    QDir dir(QDir::home());
+    if (!dir.exists("FlashBox"))
+    {
+        bool ok = dir.mkdir("FlashBox");
+        if(!ok)
+            qDebug() << "Cannot create FlashBox dir";
+    }
+    if (!dir.exists("FlashBox/cached"))
+    {
+        bool ok = dir.mkdir("FlashBox/cached");
+        if(!ok)
+            qDebug() << "Cannot create cached dir";
+    }
+    if (!dir.exists("FlashBox/games"))
+    {
+        bool ok = dir.mkdir("FlashBox/games");
+        if(!ok)
+            qDebug() << "Cannot create games dir";
     }
 }

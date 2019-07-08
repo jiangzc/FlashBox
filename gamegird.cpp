@@ -27,7 +27,7 @@ GameGird::GameGird(QWidget *parent, int gameTypeID) :
     for (int i = 0; i < GAME_PER_PAGE; i++)
     {
         GameList[i] = nullptr;
-        BlankWidget[i] = new QWidget();
+        BlankWidget[i] = new QWidget(this);
     }
     turnToPage(1);
 }

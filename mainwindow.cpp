@@ -20,7 +20,7 @@ MainWindow::MainWindow(QWidget *parent) : QMainWindow(parent), ui(new Ui::MainWi
 
     for (int i = 0; i < gamesType.size(); i++)
     {
-        QWidget *widget = new QWidget();
+        QWidget *widget = new QWidget(this);
         GameGird *g  = new GameGird(widget, i);
         ui->tabWidget->addTab(widget, gamesType[i]);
     }

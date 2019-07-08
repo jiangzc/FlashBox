@@ -114,30 +114,36 @@ void GameItem::on_pushButton_clicked()
 
 void GameItem::finished_pic()
 {
-    QFile f(pic_path);
-    if (!f.open(QIODevice::WriteOnly))
+    QFile *f = new QFile(pic_path);
+    if (!f->open(QIODevice::WriteOnly))
     {
         qDebug() << "finished_pic: cannot open file ";
         return;
     }
-    f.write(pic_reply->readAll());
-    f.close();
+    f->write(pic_reply->readAll());
+    f->close();
     refresh();
     pic_reply->deleteLater();
+    delete f;
+    pic_reply = nullptr;
+    f = nullptr;
 }
 
 void GameItem::finished_swf()
 {
-    QFile f(swf_path);
-    if (!f.open(QIODevice::WriteOnly))
+    QFile *f = new QFile(swf_path);
+    if (!f->open(QIODevice::WriteOnly))
     {
         qDebug() << "finished_swf: cannot open file ";
         return;
     }
-    f.write(swf_reply->readAll());
-    f.close();
+    f->write(swf_reply->readAll());
+    f->close();
     refresh();
     swf_reply->deleteLater();
+    delete f;
+    swf_reply = nullptr;
+    f = nullptr;
 }
 
 void GameItem::update_progress(qint64 bytesReceived, qint64 bytesTotal)
