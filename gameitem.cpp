@@ -75,6 +75,8 @@ void GameItem::refresh()
     {
         swf_exists = true;
         ui->pushButton->setText("Open");
+        ui->pushButton->setVisible(true);
+        ui->progressBar->setVisible(false);
     }
     else
     {
@@ -95,20 +97,29 @@ void GameItem::on_pushButton_clicked()
         QStringList args;
         args.append(swf_path);
         proc->start("./flashplayer", args);
-        //proc->waitForFinished();
     }
     else
     {
         // download swf
+        ui->progressBar->setVisible(true);
+        ui->pushButton->setVisible(false);
+
         swf_reply = manager->get(QNetworkRequest(QUrl(info.swfURL)));
         connect(swf_reply, SIGNAL(finished()), this, SLOT(finished_swf()));
+        connect(swf_reply, SIGNAL(downloadProgress(qint64, qint64)),
+                this, SLOT(update_progress(qint64, qint64)));
+
     }
 }
 
 void GameItem::finished_pic()
 {
     QFile f(pic_path);
-    f.open(QIODevice::WriteOnly);
+    if (!f.open(QIODevice::WriteOnly))
+    {
+        qDebug() << "finished_pic: cannot open file ";
+        return;
+    }
     f.write(pic_reply->readAll());
     f.close();
     refresh();
@@ -118,9 +129,19 @@ void GameItem::finished_pic()
 void GameItem::finished_swf()
 {
     QFile f(swf_path);
-    f.open(QIODevice::WriteOnly);
+    if (!f.open(QIODevice::WriteOnly))
+    {
+        qDebug() << "finished_swf: cannot open file ";
+        return;
+    }
     f.write(swf_reply->readAll());
     f.close();
     refresh();
     swf_reply->deleteLater();
+}
+
+void GameItem::update_progress(qint64 bytesReceived, qint64 bytesTotal)
+{
+    ui->progressBar->setMaximum(int(bytesTotal));
+    ui->progressBar->setValue(int(bytesReceived));
 }

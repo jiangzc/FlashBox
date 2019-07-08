@@ -22,6 +22,8 @@ private slots:
     void on_pushButton_clicked();
     void finished_pic();
     void finished_swf();
+    void update_progress(qint64 bytesReceived, qint64 bytesTotal);
+
 
 private:
     Ui::GameItem *ui;
