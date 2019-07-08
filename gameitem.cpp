@@ -6,16 +6,17 @@
 #include <QProcess>
 #include <QtNetwork>
 
+extern QNetworkAccessManager *manager;
+
 /*
- * Find a memory leak problem when setting StyleSheet of buttons:
- * Please refer to the urls below
+ * Find a memory leak problem when setting StyleSheet of buttons.
+ * My solution is using Plain Text in PushButton.
+ * If you have better solution, please pull request.
+ *
  * > https://forum.qt.io/topic/72195/memory-leak-problem
  * > https://bugreports.qt.io/browse/QTBUG-17151
  * > https://bugreports.qt.io/browse/QTBUG-56492
- *
- * My solution is using QIcon(QPixmap("path")).
  * > https://stackoverflow.com/a/55530863
- * If you have better solution, please pull request.
  */
 
 GameItem::GameItem(QWidget *parent, GameInfo info): QWidget(parent), ui(new Ui::GameItem)
@@ -41,6 +42,8 @@ GameItem::GameItem(QWidget *parent, GameInfo info): QWidget(parent), ui(new Ui::
     {
         ui->pictureBox->setPixmap(QPixmap("./loading.jpeg"));
         // download picture
+        pic_reply = manager->get(QNetworkRequest(QUrl(info.picURL)));
+        connect(pic_reply, SIGNAL(finished()), this, SLOT(finished_pic()));
     }
     // swf exist ?
     QFile swf(swf_path);
@@ -54,14 +57,6 @@ GameItem::GameItem(QWidget *parent, GameInfo info): QWidget(parent), ui(new Ui::
         swf_exists = false;
         ui->pushButton->setText("Download");
     }
-    // swf downloading ?
-    if (QFile::exists(FlashBox_Dir.filePath("cached/" + info.name + ".download")))
-    {
-        ui->pushButton->setText("Loading");
-        ui->pushButton->setEnabled(false);
-    }
-
-
 
 }
 
@@ -79,12 +74,12 @@ void GameItem::refresh()
     if (swf.exists())
     {
         swf_exists = true;
-        ui->pushButton->setIcon(QIcon(QPixmap("./open.png")));
+        ui->pushButton->setText("Open");
     }
     else
     {
         swf_exists = false;
-        ui->pushButton->setIcon(QIcon(QPixmap("./download.png")));
+        ui->pushButton->setText("Download");
     }
 }
 GameItem::~GameItem()
@@ -105,5 +100,27 @@ void GameItem::on_pushButton_clicked()
     else
     {
         // download swf
+        swf_reply = manager->get(QNetworkRequest(QUrl(info.swfURL)));
+        connect(swf_reply, SIGNAL(finished()), this, SLOT(finished_swf()));
     }
+}
+
+void GameItem::finished_pic()
+{
+    QFile f(pic_path);
+    f.open(QIODevice::WriteOnly);
+    f.write(pic_reply->readAll());
+    f.close();
+    refresh();
+    pic_reply->deleteLater();
+}
+
+void GameItem::finished_swf()
+{
+    QFile f(swf_path);
+    f.open(QIODevice::WriteOnly);
+    f.write(swf_reply->readAll());
+    f.close();
+    refresh();
+    swf_reply->deleteLater();
 }

@@ -11,11 +11,13 @@
 
 
 extern void ReadSourceFile(QString path);
-
+QNetworkAccessManager *manager;
 MainWindow::MainWindow(QWidget *parent) : QMainWindow(parent), ui(new Ui::MainWindow)
 {
     ui->setupUi(this);
     ReadSourceFile("./source.txt");
+    manager = new QNetworkAccessManager(this);
+
     for (int i = 0; i < gamesType.size(); i++)
     {
         QWidget *widget = new QWidget();

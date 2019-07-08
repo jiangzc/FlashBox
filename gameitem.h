@@ -4,6 +4,7 @@
 #include <QWidget>
 #include <QDir>
 #include <game.h>
+#include <QtNetwork>
 
 namespace Ui {
 class GameItem;
@@ -19,6 +20,8 @@ public:
 
 private slots:
     void on_pushButton_clicked();
+    void finished_pic();
+    void finished_swf();
 
 private:
     Ui::GameItem *ui;
@@ -28,6 +31,9 @@ private:
     QString pic_path;
     QString swf_path;
     void refresh();
+    QNetworkReply *pic_reply;
+    QNetworkReply *swf_reply;
+
 };
 
 #endif // GAMEITEM_H

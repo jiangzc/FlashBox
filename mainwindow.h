@@ -2,7 +2,8 @@
 #define MAINWINDOW_H
 
 #include <QMainWindow>
-
+#include <QtNetwork>
+extern QNetworkAccessManager *manager;
 namespace Ui {
 class MainWindow;
 }
