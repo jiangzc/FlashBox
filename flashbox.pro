@@ -30,7 +30,8 @@ SOURCES += \
     gameitem.cpp \
     gamegird.cpp \
     tools.cpp \
-    game.cpp
+    game.cpp \
+    myfavorites.cpp
 
 HEADERS += \
         mainwindow.h \
