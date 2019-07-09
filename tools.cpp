@@ -26,10 +26,20 @@ void ReadSourceFile(QString path) // relative path
         GameInfo info;
         QString line = in.readLine().mid(6);
         QTextStream linesStream(&line);
-        linesStream >> info.name >> info.ID >> info.type;
+        linesStream >> info.name;
+        int t;
+        while (!linesStream.atEnd())
+        {
+            linesStream >> t;
+            info.type.append(t);
+        }
         info.picURL = in.readLine();
         info.swfURL = in.readLine();
-        buff[info.type].append(info);
+        for (int i = 0; i < info.type.size(); i++)
+        {
+            buff[info.type[i]].append(info);
+        }
+
     }
 }
 

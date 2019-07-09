@@ -1,10 +1,10 @@
 #include <QWidget>
+#include <QVector>
 #ifndef GAME_H
 #define GAME_H
 
 struct GameInfo {
-    int type;
-    int ID;
+    QVector<int> type;
     QString name;
     QString swfURL;
     QString picURL;
