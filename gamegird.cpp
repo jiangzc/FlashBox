@@ -7,7 +7,7 @@
 #include <QTextStream>
 #include <QtDebug>
 #include <cmath>
-
+#include <QKeyEvent>
 
 
 extern QVector<QVector<GameInfo>> buff;
@@ -20,6 +20,7 @@ GameGird::GameGird(QWidget *parent, int gameTypeID) :
 {
     ui->setupUi(this);
     this->gameType = gameTypeID;
+    this->setFocusPolicy(Qt::StrongFocus);
     currentPage = 1;
     totalPage = int(ceil(1.0 * buff[gameType].size() / GAME_PER_PAGE));
     ui->label->setText(QString::number(currentPage) + "/" + QString::number(totalPage));
@@ -100,4 +101,12 @@ void GameGird::turnToPage(int page)
             ui->gridLayout->addWidget(BlankWidget[i], i / COL, i % COL);
         }
     }
+}
+
+void GameGird::keyPressEvent( QKeyEvent * event )
+{
+    if (event->key() == Qt::Key_Up)
+        on_pushButton_clicked();
+    if (event->key() == Qt::Key_Down)
+        on_pushButton_2_clicked();
 }

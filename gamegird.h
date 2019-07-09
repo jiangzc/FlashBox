@@ -16,6 +16,7 @@ class GameGird : public QWidget
 
 public:
     explicit GameGird(QWidget *parent, int gameTypeID);
+    void keyPressEvent(QKeyEvent *event);
     ~GameGird();
 
 private slots:
@@ -31,6 +32,7 @@ private:
     void turnToPage(int page);
     GameItem *GameList[GAME_PER_PAGE];
     QWidget *BlankWidget[GAME_PER_PAGE];
+
 };
 
 #endif // GAMEGIRD_H

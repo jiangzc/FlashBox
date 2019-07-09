@@ -47,6 +47,9 @@
      </item>
      <item>
       <widget class="QPushButton" name="pushButton">
+       <property name="focusPolicy">
+        <enum>Qt::NoFocus</enum>
+       </property>
        <property name="text">
         <string>PageUp</string>
        </property>
@@ -67,6 +70,9 @@
      </item>
      <item>
       <widget class="QPushButton" name="pushButton_2">
+       <property name="focusPolicy">
+        <enum>Qt::NoFocus</enum>
+       </property>
        <property name="text">
         <string>PageDown</string>
        </property>
