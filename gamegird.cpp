@@ -9,6 +9,7 @@
 #include <cmath>
 #include <QKeyEvent>
 #include <QTabWidget>
+#include <QMessageBox>
 
 
 extern QVector<QVector<GameInfo>> buff;
@@ -55,6 +56,14 @@ void GameGird::turnToPage(int page)
     {
         qDebug() << "turnToPage: out of range";
         return;
+    }
+    for (GameItem* item : GameList)
+    {
+        if (item != nullptr && item->is_downloading)
+        {
+            QMessageBox::warning(item, "Warning", "Please wait Downloading before page");
+            return;
+        }
     }
     currentPage = page;
     ui->label->setText(QString::number(currentPage) + "/" + QString::number(totalPage));

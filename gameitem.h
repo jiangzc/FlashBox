@@ -17,6 +17,8 @@ class GameItem : public QWidget
 public:
     explicit GameItem(QWidget *parent = nullptr, GameInfo info={}) ;
     ~GameItem();
+    bool is_downloading;
+    bool swf_exists;
 
 private slots:
     void on_pushButton_clicked();
@@ -28,7 +30,6 @@ private slots:
 private:
     Ui::GameItem *ui;
     GameInfo info;
-    bool swf_exists;
     QDir FlashBox_Dir;
     QString pic_path;
     QString swf_path;

@@ -28,6 +28,7 @@ GameItem::GameItem(QWidget *parent, GameInfo info): QWidget(parent), ui(new Ui::
     ui->gameName->setText(info.name);
     ui->pushButton->setIconSize(QSize(100, 30));
     ui->progressBar->setVisible(false);
+    this->is_downloading = false;
     // set path
     FlashBox_Dir = QDir::home();
     FlashBox_Dir.cd("FlashBox");
@@ -102,7 +103,7 @@ void GameItem::on_pushButton_clicked()
         // download swf
         ui->progressBar->setVisible(true);
         ui->pushButton->setVisible(false);
-
+        this->is_downloading = true;
         swf_reply = manager->get(QNetworkRequest(QUrl(info.swfURL)));
         connect(swf_reply, SIGNAL(finished()), this, SLOT(finished_swf()));
         connect(swf_reply, SIGNAL(downloadProgress(qint64, qint64)),
@@ -138,6 +139,7 @@ void GameItem::finished_swf()
     }
     f->write(swf_reply->readAll());
     f->close();
+    this->is_downloading = false;
     refresh();
     swf_reply->deleteLater();
     delete f;
