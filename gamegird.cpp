@@ -8,6 +8,7 @@
 #include <QtDebug>
 #include <cmath>
 #include <QKeyEvent>
+#include <QTabWidget>
 
 
 extern QVector<QVector<GameInfo>> buff;
@@ -97,6 +98,7 @@ void GameGird::turnToPage(int page)
 
 void GameGird::keyPressEvent( QKeyEvent * event )
 {
+    QTabWidget *w = dynamic_cast<QTabWidget*>(this->parent()->parent());
     switch (event->key())
     {
         case Qt::Key_Up:
@@ -104,6 +106,12 @@ void GameGird::keyPressEvent( QKeyEvent * event )
             break;
         case Qt::Key_Down:
             turnToPage(currentPage + 1);
+            break;
+        case Qt::Key_Left:
+            w->setCurrentIndex(w->currentIndex() - 1);
+            break;
+        case Qt::Key_Right:
+             w->setCurrentIndex(w->currentIndex() + 1);
             break;
         default:
             break;
