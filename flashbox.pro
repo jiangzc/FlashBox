@@ -37,7 +37,8 @@ HEADERS += \
         mainwindow.h \
     gameitem.h \
     gamegird.h \
-    game.h
+    game.h \
+    myfavorite.h
 
 FORMS += \
         mainwindow.ui \

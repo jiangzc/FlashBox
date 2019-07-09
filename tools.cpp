@@ -6,10 +6,10 @@
 #include <QProcess>
 #include <QCoreApplication>
 #include "game.h"
+#include "myfavorite.h"
 
 QVector<QVector<GameInfo>> buff;
 QStringList gamesType;
-QSet<QString> MyFavorites;
 
 void ReadSourceFile()
 {
@@ -25,6 +25,7 @@ void ReadSourceFile()
     gamesType = firstline.split(" ");
     for (int i = 0; i < gamesType.size(); i++)
         buff.append(QVector<GameInfo>());
+    myFavorite.loads(10);
     // Read game's content
     while (!in.atEnd())
     {
@@ -38,26 +39,7 @@ void ReadSourceFile()
     file.close();
     //
     //
-    // Read MyFavorites
-    {
-        QFile file(dir.filePath("likes.source"));
-        if (!file.open(QIODevice::ReadOnly | QIODevice::Text))
-            return;
-        QTextStream in(&file);
 
-        // Read game's content
-        while (!in.atEnd())
-        {
-            GameInfo info;
-            in >> info;
-            MyFavorites.insert(info.name);
-            for (int i = 0; i < info.type.size(); i++)
-            {
-                buff[info.type[i]].append(info);
-            }
-        }
-        file.close();
-    }
     // Read other source
     QStringList filter;
     filter << "*.source";

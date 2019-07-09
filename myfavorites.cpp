@@ -1,16 +1,7 @@
-#include <QDir>
-#include <QFile>
-#include <QTextStream>
-#include "game.h"
-class MyFavorite
-{
-public:
-    MyFavorite(int gameType);
-    int gameType;
+#include "myfavorite.h"
 
-};
 
-MyFavorite::MyFavorite(int gameType)
+void MyFavorite::loads(int gameType)
 {
     // Read MyFavorites
     this->gameType = gameType;
@@ -24,12 +15,50 @@ MyFavorite::MyFavorite(int gameType)
     {
         GameInfo info;
         in >> info;
-        MyFavorites.insert(info.name);
-        for (int i = 0; i < info.type.size(); i++)
+        Items.insert(info.name);
+        buff[gameType].append(info);
+    }
+    file.close();
+
+}
+
+void MyFavorite::addLikes(GameInfo info)
+{
+    QFile file("./likes.source");
+    if (!file.open(QFile::Append))
+        return;
+    QTextStream out(&file);
+    info.type.clear();
+    info.type.append(10);
+    out << info;
+    file.close();
+    Items.insert(info.name);
+}
+
+bool MyFavorite::isLiked(QString name)
+{
+    if (Items.find(name) == Items.end())
+        return false;
+    return true;
+}
+
+void MyFavorite::removeLikes(GameInfo info)
+{
+    Items.remove(info.name);
+    // write back to file
+    QFile file("./likes.source");
+    if (!file.open(QFile::WriteOnly))
+        return;
+    QTextStream out(&file);
+    for (GameInfo &info : buff[gameType])
+    {
+        if (isLiked(info.name))
         {
-            buff[info.type[i]].append(info);
+            out << info;
         }
     }
     file.close();
 
 }
+
+MyFavorite myFavorite;

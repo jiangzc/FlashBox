@@ -6,11 +6,11 @@
 #include <QProcess>
 #include <QtNetwork>
 #include <string>
+#include "myfavorite.h"
 
 extern QNetworkAccessManager *manager;
 extern void launchGame(QString);
-extern void addLikes(GameInfo info);
-extern QSet<QString> MyFavorites;
+extern MyFavorite myFavorite;
 /*
  * Find a memory leak problem when setting StyleSheet of buttons.
  * My solution is using Plain Text in PushButton.
@@ -30,7 +30,7 @@ GameItem::GameItem(QWidget *parent, GameInfo info): QWidget(parent), ui(new Ui::
     ui->pushButton->setIconSize(QSize(100, 30));
     ui->progressBar->setVisible(false);
     this->is_downloading = false;
-    if (MyFavorites.find(info.name) != MyFavorites.end())
+    if (myFavorite.isLiked(info.name))
         ui->likesButton->setChecked(true);
     // set path
     FlashBox_Dir = QDir::home();
@@ -158,5 +158,12 @@ void GameItem::update_progress(qint64 bytesReceived, qint64 bytesTotal)
 
 void GameItem::on_likesButton_clicked(bool checked)
 {
-    addLikes(this->info);
+    if(checked)
+    {
+        myFavorite.removeLikes(this->info);
+    }
+    else
+    {
+        myFavorite.addLikes(this->info);
+    }
 }

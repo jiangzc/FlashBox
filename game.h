@@ -17,6 +17,4 @@ struct GameInfo {
 };
 extern QStringList gamesType;
 extern QVector<QVector<GameInfo>> buff; // buff[GameTypeId][GameId]
-extern QSet<QString> MyFavorites;
-
 #endif // GAME_H
