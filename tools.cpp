@@ -45,7 +45,7 @@ void ReadSourceFile()
     filter << "*.source";
     for (QString fileName: dir.entryList(filter))
     {
-        if (fileName == "main.source")
+        if (fileName == "main.source" || fileName == "likes.source")
             continue;
         QFile file(dir.filePath(fileName));
         if (!file.open(QIODevice::ReadOnly | QIODevice::Text))
