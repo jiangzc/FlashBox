@@ -40,31 +40,23 @@ GameGird::~GameGird()
 
 void GameGird::on_pushButton_clicked()
 {
-    if (currentPage > 1)
-    {
-        currentPage--;
-        ui->label->setText(QString::number(currentPage) + "/" + QString::number(totalPage));
-        turnToPage(currentPage);
-    }
+    turnToPage(currentPage - 1);
 }
 
 void GameGird::on_pushButton_2_clicked()
 {
-    if (currentPage < totalPage)
-    {
-        currentPage++;
-        ui->label->setText(QString::number(currentPage) + "/" + QString::number(totalPage));
-        turnToPage(currentPage);
-    }
+    turnToPage(currentPage + 1);
 }
 
 void GameGird::turnToPage(int page)
 {
-    if (page > totalPage)
+    if (page > totalPage || page < 1)
     {
         qDebug() << "turnToPage: out of range";
         return;
     }
+    currentPage = page;
+    ui->label->setText(QString::number(currentPage) + "/" + QString::number(totalPage));
     // release memeory
     for (int i = 0; i < GAME_PER_PAGE; i++)
     {
@@ -108,10 +100,10 @@ void GameGird::keyPressEvent( QKeyEvent * event )
     switch (event->key())
     {
         case Qt::Key_Up:
-            on_pushButton_clicked();
+            turnToPage(currentPage - 1);
             break;
         case Qt::Key_Down:
-            on_pushButton_2_clicked();
+            turnToPage(currentPage + 1);
             break;
         default:
             break;
