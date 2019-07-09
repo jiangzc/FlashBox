@@ -6,48 +6,19 @@
    <rect>
     <x>0</x>
     <y>0</y>
-    <width>147</width>
+    <width>165</width>
     <height>180</height>
    </rect>
   </property>
   <property name="minimumSize">
    <size>
-    <width>0</width>
+    <width>165</width>
     <height>180</height>
    </size>
   </property>
   <property name="windowTitle">
    <string>Form</string>
   </property>
-  <widget class="QWidget" name="widget" native="true">
-   <property name="geometry">
-    <rect>
-     <x>10</x>
-     <y>10</y>
-     <width>140</width>
-     <height>110</height>
-    </rect>
-   </property>
-   <property name="minimumSize">
-    <size>
-     <width>140</width>
-     <height>110</height>
-    </size>
-   </property>
-   <widget class="QLabel" name="pictureBox">
-    <property name="geometry">
-     <rect>
-      <x>10</x>
-      <y>0</y>
-      <width>100</width>
-      <height>100</height>
-     </rect>
-    </property>
-    <property name="text">
-     <string>PictureBox</string>
-    </property>
-   </widget>
-  </widget>
   <widget class="QProgressBar" name="progressBar">
    <property name="geometry">
     <rect>
@@ -107,22 +78,40 @@
     <string>gameName</string>
    </property>
   </widget>
-  <widget class="QWidget" name="widget" native="true">
+  <widget class="QLabel" name="pictureBox">
    <property name="geometry">
     <rect>
-     <x>462</x>
-     <y>11</y>
-     <width>195</width>
-     <height>34</height>
+     <x>20</x>
+     <y>10</y>
+     <width>100</width>
+     <height>100</height>
     </rect>
    </property>
-   <layout class="QHBoxLayout" name="horizontalLayout"/>
+   <property name="text">
+    <string>PictureBox</string>
+   </property>
   </widget>
-  <zorder>widget</zorder>
+  <widget class="QPushButton" name="likesButton">
+   <property name="geometry">
+    <rect>
+     <x>130</x>
+     <y>10</y>
+     <width>30</width>
+     <height>30</height>
+    </rect>
+   </property>
+   <property name="text">
+    <string/>
+   </property>
+   <property name="checkable">
+    <bool>true</bool>
+   </property>
+  </widget>
   <zorder>pushButton</zorder>
   <zorder>gameName</zorder>
-  <zorder>widget</zorder>
   <zorder>progressBar</zorder>
+  <zorder>pictureBox</zorder>
+  <zorder>likesButton</zorder>
  </widget>
  <resources/>
  <connections/>

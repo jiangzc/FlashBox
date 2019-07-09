@@ -10,12 +10,12 @@
 #include <cmath>
 
 
-extern void ReadSourceFile(QDir dir);
+extern void ReadSourceFile();
 QNetworkAccessManager *manager;
 MainWindow::MainWindow(QWidget *parent) : QMainWindow(parent), ui(new Ui::MainWindow)
 {
     ui->setupUi(this);
-    ReadSourceFile(QCoreApplication::applicationDirPath());
+    ReadSourceFile();
     manager = new QNetworkAccessManager(this);
 
     for (int i = 0; i < gamesType.size(); i++)

@@ -27,6 +27,8 @@ private slots:
     void update_progress(qint64 bytesReceived, qint64 bytesTotal);
 
 
+    void on_likesButton_clicked(bool checked);
+
 private:
     Ui::GameItem *ui;
     GameInfo info;

@@ -20,7 +20,11 @@ QTextStream &operator<<(QTextStream &output, GameInfo &info)
 
 QTextStream &operator>>(QTextStream &input, GameInfo &info)
 {
-    QString line = input.readLine().mid(6);
+    // ignore blank line
+    QString line = input.readLine();
+    while (line.isEmpty() && !input.atEnd())
+        line = input.readLine();
+    line = line.mid(6);
     QTextStream linesStream(&line);
     linesStream >> info.name;
     int t;
@@ -36,7 +40,7 @@ QTextStream &operator>>(QTextStream &input, GameInfo &info)
 
 QString GameInfo::toString()
 {
-    QString s("[Game] " + name);
+    QString s("[Game] " + name + " ");
     for (int &i : type)
         s += QString::number(i);
     s += '\n';

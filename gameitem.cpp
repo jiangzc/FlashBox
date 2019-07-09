@@ -9,6 +9,7 @@
 
 extern QNetworkAccessManager *manager;
 extern void launchGame(QString);
+extern void addLikes(GameInfo info);
 
 /*
  * Find a memory leak problem when setting StyleSheet of buttons.
@@ -151,4 +152,9 @@ void GameItem::update_progress(qint64 bytesReceived, qint64 bytesTotal)
 {
     ui->progressBar->setMaximum(int(bytesTotal));
     ui->progressBar->setValue(int(bytesReceived));
+}
+
+void GameItem::on_likesButton_clicked(bool checked)
+{
+    addLikes(this->info);
 }

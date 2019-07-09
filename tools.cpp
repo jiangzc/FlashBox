@@ -4,13 +4,15 @@
 #include <QTextStream>
 #include <QtDebug>
 #include <QProcess>
+#include <QCoreApplication>
 #include "game.h"
 
 QVector<QVector<GameInfo>> buff;
 QStringList gamesType;
 
-void ReadSourceFile(QDir dir)
+void ReadSourceFile()
 {
+    QDir dir = QCoreApplication::applicationDirPath();
     // Read main.source
     QFile file(dir.filePath("main.source"));
     if (!file.open(QIODevice::ReadOnly | QIODevice::Text))
@@ -102,4 +104,28 @@ void launchGame(QString swf_path)
     cmd += "xdotool key --window `xdotool search --onlyvisible --pid " +std::to_string(proc->processId())+ "` ctrl+3 ctrl+f";
     qDebug() << cmd.c_str();
     system(cmd.c_str());
+}
+
+void addLikes(GameInfo info)
+{
+    QFile file("./likes.source");
+    if (!file.open(QFile::Append))
+        return;
+    QTextStream out(&file);
+    info.type.clear();
+    info.type.append(10);
+    out << info;
+    file.close();
+}
+
+void addPlayed(GameInfo info)
+{
+    QFile file("./played.source");
+    if (!file.open(QFile::Append))
+        return;
+    QTextStream out(&file);
+    info.type.clear();
+    info.type.append(9);
+    out << info;
+    file.close();
 }
