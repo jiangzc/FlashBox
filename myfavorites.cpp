@@ -33,6 +33,7 @@ void MyFavorite::addLikes(GameInfo info)
     out << info;
     file.close();
     Items.insert(info.name);
+    this->gird->AddGame(info);
 }
 
 bool MyFavorite::isLiked(QString name)

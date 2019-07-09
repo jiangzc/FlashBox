@@ -5,6 +5,7 @@
 #include <QTextStream>
 #include "game.h"
 #include <QSet>
+#include "gamegird.h"
 
 class MyFavorite
 {
@@ -16,7 +17,7 @@ public:
     void addLikes(GameInfo info);
     void removeLikes(GameInfo info);
     bool isLiked(QString info);
-
+    GameGird* gird;
 };
 extern MyFavorite myFavorite;
 #endif // MYFAVORITE_H

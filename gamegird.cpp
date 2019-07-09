@@ -127,3 +127,19 @@ void GameGird::keyPressEvent( QKeyEvent * event )
     }
 
 }
+
+void GameGird::AddGame(GameInfo info)
+{
+    totalPage = int(ceil(1.0 * buff[gameType].size() / GAME_PER_PAGE));
+    ui->label->setText(QString::number(currentPage) + "/" + QString::number(totalPage));
+    for (int i = 0; i < GAME_PER_PAGE; i++)
+    {
+        if (GameList[i] == nullptr)
+        {
+            GameList[i] = new GameItem(this, info);
+            ui->gridLayout->addWidget(GameList[i], i / COL, i % COL);
+            return;
+        }
+   }
+}
+

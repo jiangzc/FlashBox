@@ -8,6 +8,7 @@
 #include <QTextStream>
 #include <QtDebug>
 #include <cmath>
+#include "myfavorite.h"
 
 
 extern void ReadSourceFile();
@@ -22,6 +23,8 @@ MainWindow::MainWindow(QWidget *parent) : QMainWindow(parent), ui(new Ui::MainWi
     {
         GameGird *g  = new GameGird(ui->tabWidget, i);
         ui->tabWidget->addTab(g, gamesType[i]);
+        if (i == 10)
+            myFavorite.gird = g;
     }
     ui->tabWidget->currentWidget()->setFocus();
 }

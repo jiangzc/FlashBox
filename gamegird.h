@@ -17,6 +17,7 @@ class GameGird : public QWidget
 public:
     explicit GameGird(QWidget *parent, int gameTypeID);
     void keyPressEvent(QKeyEvent *event);
+    void AddGame(GameInfo info);
     ~GameGird();
 
 private slots:
