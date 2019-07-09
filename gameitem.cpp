@@ -160,10 +160,11 @@ void GameItem::on_likesButton_clicked(bool checked)
 {
     if(checked)
     {
-        myFavorite.removeLikes(this->info);
+        myFavorite.addLikes(this->info);
+        //myFavorite.removeLikes(this->info);
     }
     else
     {
-        myFavorite.addLikes(this->info);
+        myFavorite.removeLikes(this->info);
     }
 }
