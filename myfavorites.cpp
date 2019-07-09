@@ -33,6 +33,8 @@ void MyFavorite::addLikes(GameInfo info)
     out << info;
     file.close();
     Items.insert(info.name);
+    buff[gameType].append(info);
+
     this->gird->AddGame(info);
 }
 
@@ -46,6 +48,7 @@ bool MyFavorite::isLiked(QString name)
 void MyFavorite::removeLikes(GameInfo info)
 {
     Items.remove(info.name);
+    buff[gameType].removeOne(info);
     // write back to file
     QFile file("./likes.source");
     if (!file.open(QFile::WriteOnly))

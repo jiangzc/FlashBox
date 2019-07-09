@@ -12,6 +12,7 @@ struct GameInfo {
     GameInfo();
     ~GameInfo();
     QString toString();
+    bool operator==(const GameInfo &info);
     friend QTextStream &operator<<(QTextStream &output, GameInfo &info);
     friend QTextStream &operator>>(QTextStream &input, GameInfo &info);
 };

@@ -1,0 +1,128 @@
+[1mdiff --git a/gamegird.cpp b/gamegird.cpp[m
+[1mindex db4f263..b0830ef 100644[m
+[1m--- a/gamegird.cpp[m
+[1m+++ b/gamegird.cpp[m
+[36m@@ -128,7 +128,7 @@[m [mvoid GameGird::keyPressEvent( QKeyEvent * event )[m
+ [m
+ }[m
+ [m
+[31m-void GameGird::AddGame(GameInfo info)[m
+[32m+[m[32mvoid GameGird::AddWidget(GameInfo info)[m
+ {[m
+     totalPage = int(ceil(1.0 * buff[gameType].size() / GAME_PER_PAGE));[m
+     ui->label->setText(QString::number(currentPage) + "/" + QString::number(totalPage));[m
+[36m@@ -138,8 +138,6 @@[m [mvoid GameGird::AddGame(GameInfo info)[m
+         {[m
+             GameList[i] = new GameItem(this, info);[m
+             ui->gridLayout->addWidget(GameList[i], i / COL, i % COL);[m
+[31m-            return;[m
+         }[m
+[31m-   }[m
+[32m+[m[32m    }[m
+ }[m
+[31m-[m
+[1mdiff --git a/gamegird.h b/gamegird.h[m
+[1mindex b2f6319..eb22fbb 100644[m
+[1m--- a/gamegird.h[m
+[1m+++ b/gamegird.h[m
+[36m@@ -17,7 +17,7 @@[m [mclass GameGird : public QWidget[m
+ public:[m
+     explicit GameGird(QWidget *parent, int gameTypeID);[m
+     void keyPressEvent(QKeyEvent *event);[m
+[31m-    void AddGame(GameInfo info);[m
+[32m+[m[32m    void AddWidget(GameInfo info);[m
+     ~GameGird();[m
+ [m
+ private slots:[m
+[1mdiff --git a/gameitem.cpp b/gameitem.cpp[m
+[1mindex 7cdc41c..0fe691f 100644[m
+[1m--- a/gameitem.cpp[m
+[1m+++ b/gameitem.cpp[m
+[36m@@ -161,7 +161,6 @@[m [mvoid GameItem::on_likesButton_clicked(bool checked)[m
+     if(checked)[m
+     {[m
+         myFavorite.addLikes(this->info);[m
+[31m-        //myFavorite.removeLikes(this->info);[m
+     }[m
+     else[m
+     {[m
+[1mdiff --git a/mainwindow.cpp b/mainwindow.cpp[m
+[1mindex 8a20842..d17a6a3 100644[m
+[1m--- a/mainwindow.cpp[m
+[1m+++ b/mainwindow.cpp[m
+[36m@@ -8,7 +8,7 @@[m
+ #include <QTextStream>[m
+ #include <QtDebug>[m
+ #include <cmath>[m
+[31m-#include "myfavorite.h"[m
+[32m+[m[32m#include <myfavorite.h>[m
+ [m
+ [m
+ extern void ReadSourceFile();[m
+[36m@@ -23,8 +23,8 @@[m [mMainWindow::MainWindow(QWidget *parent) : QMainWindow(parent), ui(new Ui::MainWi[m
+     {[m
+         GameGird *g  = new GameGird(ui->tabWidget, i);[m
+         ui->tabWidget->addTab(g, gamesType[i]);[m
+[31m-        if (i == 10)[m
+[31m-            myFavorite.gird = g;[m
+[32m+[m[32m        if (i == myFavorite.gameType)[m
+[32m+[m[32m            myFavorite.favoriteGird = g;[m
+     }[m
+     ui->tabWidget->currentWidget()->setFocus();[m
+ }[m
+[1mdiff --git a/myfavorite.h b/myfavorite.h[m
+[1mindex 9c14676..0debf46 100644[m
+[1m--- a/myfavorite.h[m
+[1m+++ b/myfavorite.h[m
+[36m@@ -17,7 +17,8 @@[m [mpublic:[m
+     void addLikes(GameInfo info);[m
+     void removeLikes(GameInfo info);[m
+     bool isLiked(QString info);[m
+[31m-    GameGird* gird;[m
+[32m+[m[32m    GameGird *favoriteGird;[m
+[32m+[m
+ };[m
+ extern MyFavorite myFavorite;[m
+ #endif // MYFAVORITE_H[m
+[1mdiff --git a/myfavorites.cpp b/myfavorites.cpp[m
+[1mindex 674c55b..54c84ad 100644[m
+[1m--- a/myfavorites.cpp[m
+[1m+++ b/myfavorites.cpp[m
+[36m@@ -4,6 +4,8 @@[m
+ void MyFavorite::loads(int gameType)[m
+ {[m
+     // Read MyFavorites[m
+[32m+[m[32m    Items.clear();[m
+[32m+[m[32m    buff[gameType].clear();[m
+     this->gameType = gameType;[m
+     QFile file("./likes.source");[m
+     if (!file.open(QIODevice::ReadOnly | QIODevice::Text))[m
+[36m@@ -24,6 +26,8 @@[m [mvoid MyFavorite::loads(int gameType)[m
+ [m
+ void MyFavorite::addLikes(GameInfo info)[m
+ {[m
+[32m+[m[32m    Items.insert(info.name);[m
+[32m+[m[32m    buff[gameType].append(info);[m
+     QFile file("./likes.source");[m
+     if (!file.open(QFile::Append))[m
+         return;[m
+[36m@@ -32,8 +36,9 @@[m [mvoid MyFavorite::addLikes(GameInfo info)[m
+     info.type.append(10);[m
+     out << info;[m
+     file.close();[m
+[31m-    Items.insert(info.name);[m
+[31m-    this->gird->AddGame(info);[m
+[32m+[m[32m    //[m
+[32m+[m[32m    this->favoriteGird->AddWidget(info);[m
+[32m+[m
+ }[m
+ [m
+ bool MyFavorite::isLiked(QString name)[m
+[36m@@ -46,6 +51,7 @@[m [mbool MyFavorite::isLiked(QString name)[m
+ void MyFavorite::removeLikes(GameInfo info)[m
+ {[m
+     Items.remove(info.name);[m
+[32m+[m[32m    buff[gameType].removeOne(info);[m
+     // write back to file[m
+     QFile file("./likes.source");[m
+     if (!file.open(QFile::WriteOnly))[m

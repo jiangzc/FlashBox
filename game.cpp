@@ -11,7 +11,12 @@ GameInfo::~GameInfo()
     ;
 }
 
+bool GameInfo::operator==(const GameInfo &info)
+{
+        bool res = (this->name == info.name);
+        return res;
 
+}
 QTextStream &operator<<(QTextStream &output, GameInfo &info)
 {
     output << info.toString();

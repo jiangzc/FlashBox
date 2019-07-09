@@ -52,6 +52,13 @@ void GameGird::on_pushButton_2_clicked()
 
 void GameGird::turnToPage(int page)
 {
+    if (totalPage == 0)
+    {
+        for (int i = 0; i < GAME_PER_PAGE; i++)
+        {
+            ui->gridLayout->addWidget(BlankWidget[i], i / COL, i % COL);
+        }
+    }
     if (page > totalPage || page < 1)
     {
         qDebug() << "turnToPage: out of range";
