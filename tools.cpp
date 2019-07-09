@@ -11,7 +11,7 @@ QStringList gamesType;
 
 void ReadSourceFile(QDir dir)
 {
-    // Read source.txt
+    // Read main.source
     QFile file(dir.filePath("main.source"));
     if (!file.open(QIODevice::ReadOnly | QIODevice::Text))
         return;
@@ -32,14 +32,39 @@ void ReadSourceFile(QDir dir)
         }
     }
     file.close();
+    //
+    // Read other source
+    QStringList filter;
+    filter << "*.source";
+    for (QString fileName: dir.entryList(filter))
+    {
+        if (fileName == "main.source")
+            continue;
+        QFile file(dir.filePath(fileName));
+        if (!file.open(QIODevice::ReadOnly | QIODevice::Text))
+            return;
+        QTextStream in(&file);
+
+        // Read game's content
+        while (!in.atEnd())
+        {
+            GameInfo info;
+            in >> info;
+            for (int i = 0; i < info.type.size(); i++)
+            {
+                buff[info.type[i]].append(info);
+            }
+        }
+        file.close();
+    }
 }
 
 void checkFiles()
 {
     if (!QFile::exists("./flashplayer"))
         qDebug() << "Not Found: flashplayer";
-    if (!QFile::exists("./source.txt"))
-        qDebug() << "Not Found: ./source.txt";
+    if (!QFile::exists("./main.source"))
+        qDebug() << "Not Found: ./main.source";
     // FlashBox Dir exist ?
     QDir dir(QDir::home());
     if (!dir.exists("FlashBox"))
