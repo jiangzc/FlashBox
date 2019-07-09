@@ -5,8 +5,10 @@
 #include <QPixmap>
 #include <QProcess>
 #include <QtNetwork>
+#include <string>
 
 extern QNetworkAccessManager *manager;
+extern void launchGame(QString);
 
 /*
  * Find a memory leak problem when setting StyleSheet of buttons.
@@ -93,10 +95,7 @@ void GameItem::on_pushButton_clicked()
 {
     if (swf_exists)
     {
-        QProcess *proc = new QProcess();
-        QStringList args;
-        args.append(swf_path);
-        proc->start("./flashplayer", args);
+        launchGame(swf_path);
     }
     else
     {

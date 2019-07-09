@@ -3,6 +3,7 @@
 #include <QVector>
 #include <QTextStream>
 #include <QtDebug>
+#include <QProcess>
 #include "game.h"
 
 QVector<QVector<GameInfo>> buff;
@@ -69,4 +70,20 @@ void checkFiles()
         if(!ok)
             qDebug() << "Cannot create games dir";
     }
+}
+
+void launchGame(QString swf_path)
+{
+    QProcess *proc = new QProcess();
+    QStringList args;
+    args.append(swf_path);
+    proc->start("./flashplayer", args);
+    // wait for flashplayer
+    std::string cmd = "sleep 0.5 && ";
+    // focus on flashplayer
+    cmd += "xdotool windowactivate `xdotool search --onlyvisible --pid " + std::to_string(proc->processId())+ "` &&";
+    // maximize flashplayer
+    cmd += "xdotool key --window `xdotool search --onlyvisible --pid " +std::to_string(proc->processId())+ "` ctrl+3 ctrl+f";
+    qDebug() << cmd.c_str();
+    system(cmd.c_str());
 }

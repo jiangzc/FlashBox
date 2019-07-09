@@ -105,8 +105,16 @@ void GameGird::turnToPage(int page)
 
 void GameGird::keyPressEvent( QKeyEvent * event )
 {
-    if (event->key() == Qt::Key_Up)
-        on_pushButton_clicked();
-    if (event->key() == Qt::Key_Down)
-        on_pushButton_2_clicked();
+    switch (event->key())
+    {
+        case Qt::Key_Up:
+            on_pushButton_clicked();
+            break;
+        case Qt::Key_Down:
+            on_pushButton_2_clicked();
+            break;
+        default:
+            break;
+    }
+
 }
