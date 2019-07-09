@@ -9,14 +9,14 @@
 QVector<QVector<GameInfo>> buff;
 QStringList gamesType;
 
-void ReadSourceFile(QString path) // relative path
+void ReadSourceFile(QDir dir)
 {
     // Read source.txt
-    QFile file(path);
+    QFile file(dir.filePath("main.source"));
     if (!file.open(QIODevice::ReadOnly | QIODevice::Text))
         return;
     QTextStream in(&file);
-    // Read games' type
+    // Read the first line (games' type)
     QString firstline = in.readLine();
     gamesType = firstline.split(" ");
     for (int i = 0; i < gamesType.size(); i++)
@@ -25,23 +25,13 @@ void ReadSourceFile(QString path) // relative path
     while (!in.atEnd())
     {
         GameInfo info;
-        QString line = in.readLine().mid(6);
-        QTextStream linesStream(&line);
-        linesStream >> info.name;
-        int t;
-        while (!linesStream.atEnd())
-        {
-            linesStream >> t;
-            info.type.append(t);
-        }
-        info.picURL = in.readLine();
-        info.swfURL = in.readLine();
+        in >> info;
         for (int i = 0; i < info.type.size(); i++)
         {
             buff[info.type[i]].append(info);
         }
-
     }
+    file.close();
 }
 
 void checkFiles()

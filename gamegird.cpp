@@ -61,7 +61,7 @@ void GameGird::turnToPage(int page)
     {
         if (item != nullptr && item->is_downloading)
         {
-            QMessageBox::warning(item, "Warning", "Please wait Downloading before page");
+            QMessageBox::warning(item, "Warning", "Cannot page while downloading");
             return;
         }
     }

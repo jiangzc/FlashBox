@@ -29,7 +29,8 @@ SOURCES += \
         mainwindow.cpp \
     gameitem.cpp \
     gamegird.cpp \
-    tools.cpp
+    tools.cpp \
+    game.cpp
 
 HEADERS += \
         mainwindow.h \
