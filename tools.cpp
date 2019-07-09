@@ -78,6 +78,7 @@ void launchGame(QString swf_path)
     QStringList args;
     args.append(swf_path);
     proc->start("./flashplayer", args);
+    qDebug() << "launching game";
     // wait for flashplayer
     std::string cmd = "sleep 0.5 && ";
     // focus on flashplayer
