@@ -9,10 +9,12 @@
 
 QVector<QVector<GameInfo>> buff;
 QStringList gamesType;
+QSet<QString> MyFavorites;
 
 void ReadSourceFile()
 {
     QDir dir = QCoreApplication::applicationDirPath();
+
     // Read main.source
     QFile file(dir.filePath("main.source"));
     if (!file.open(QIODevice::ReadOnly | QIODevice::Text))
@@ -35,6 +37,27 @@ void ReadSourceFile()
     }
     file.close();
     //
+    //
+    // Read MyFavorites
+    {
+        QFile file(dir.filePath("likes.source"));
+        if (!file.open(QIODevice::ReadOnly | QIODevice::Text))
+            return;
+        QTextStream in(&file);
+
+        // Read game's content
+        while (!in.atEnd())
+        {
+            GameInfo info;
+            in >> info;
+            MyFavorites.insert(info.name);
+            for (int i = 0; i < info.type.size(); i++)
+            {
+                buff[info.type[i]].append(info);
+            }
+        }
+        file.close();
+    }
     // Read other source
     QStringList filter;
     filter << "*.source";

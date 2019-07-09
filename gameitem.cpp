@@ -10,7 +10,7 @@
 extern QNetworkAccessManager *manager;
 extern void launchGame(QString);
 extern void addLikes(GameInfo info);
-
+extern QSet<QString> MyFavorites;
 /*
  * Find a memory leak problem when setting StyleSheet of buttons.
  * My solution is using Plain Text in PushButton.
@@ -30,6 +30,8 @@ GameItem::GameItem(QWidget *parent, GameInfo info): QWidget(parent), ui(new Ui::
     ui->pushButton->setIconSize(QSize(100, 30));
     ui->progressBar->setVisible(false);
     this->is_downloading = false;
+    if (MyFavorites.find(info.name) != MyFavorites.end())
+        ui->likesButton->setChecked(true);
     // set path
     FlashBox_Dir = QDir::home();
     FlashBox_Dir.cd("FlashBox");
