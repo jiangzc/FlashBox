@@ -29,19 +29,19 @@ void MyFavorite::addLikes(GameInfo info)
     buff[gameType].append(info);
     for (GameGrid* &g : grids)
         g->refresh();
-    if (info.type[0] == 10)
+    if (info.type[0] == gameType)
         return;
     QFile file("./likes.source");
     if (!file.open(QFile::Append))
         return;
     QTextStream out(&file);
     info.type.clear();
-    info.type.append(10);
+    info.type.append(gameType);
     out << info;
     file.close();
 
 
-    this->gird->AddGame(info);
+    this->grid->AddGame(info);
 }
 
 bool MyFavorite::isLiked(QString name)

@@ -17,7 +17,7 @@ public:
     void addLikes(GameInfo info);
     void removeLikes(GameInfo info);
     bool isLiked(QString info);
-    GameGrid* gird;
+    GameGrid* grid;
 
 };
 extern MyFavorite myFavorite;

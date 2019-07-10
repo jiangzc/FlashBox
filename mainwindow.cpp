@@ -25,8 +25,6 @@ MainWindow::MainWindow(QWidget *parent) : QMainWindow(parent), ui(new Ui::MainWi
         GameGrid *g  = new GameGrid(ui->tabWidget, i);
         ui->tabWidget->addTab(g, gamesType[i]);
         grids.append(g);
-        if (i == 10)
-            myFavorite.gird = g;
     }
     ui->tabWidget->currentWidget()->setFocus();
 }

@@ -111,17 +111,6 @@ void launchGame(QString swf_path)
     system(cmd.c_str());
 }
 
-void addLikes(GameInfo info)
-{
-    QFile file("./likes.source");
-    if (!file.open(QFile::Append))
-        return;
-    QTextStream out(&file);
-    info.type.clear();
-    info.type.append(10);
-    out << info;
-    file.close();
-}
 
 void addPlayed(GameInfo info)
 {
