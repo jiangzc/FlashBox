@@ -28,8 +28,13 @@ GameItem::GameItem(QWidget *parent, GameInfo info): QWidget(parent), ui(new Ui::
     this->info = info;
     ui->gameName->setText(info.name);
     ui->pushButton->setIconSize(QSize(100, 30));
-    ui->pushButton->setFlat(false);
+
+    ui->pushButton->setFlat(true);
+
+    //
     ui->likesButton->setIconSize(QSize(30, 30));
+    ui->likesButton->setFlat(true);
+
     ui->progressBar->setVisible(false);
     this->is_downloading = false;
     if (myFavorite.isLiked(info.name))
@@ -65,12 +70,14 @@ GameItem::GameItem(QWidget *parent, GameInfo info): QWidget(parent), ui(new Ui::
     if (swf.exists())
     {
         swf_exists = true;
-        ui->pushButton->setText("Open");
+        //ui->pushButton->setText("Open");
+        ui->pushButton->setIcon(QPixmap("./open.png"));
     }
     else
     {
         swf_exists = false;
-        ui->pushButton->setText("Download");
+        //ui->pushButton->setText("Download");
+        ui->pushButton->setIcon(QPixmap("./download.png"));
     }
 
 }
@@ -94,14 +101,16 @@ void GameItem::refresh()
     if (swf.exists())
     {
         swf_exists = true;
-        ui->pushButton->setText("Open");
+        //ui->pushButton->setText("Open");
+        ui->pushButton->setIcon(QPixmap("./open.png"));
         ui->pushButton->setVisible(true);
         ui->progressBar->setVisible(false);
     }
     else
     {
         swf_exists = false;
-        ui->pushButton->setText("Download");
+        //ui->pushButton->setText("Download");
+        ui->pushButton->setIcon(QPixmap("./download.png"));
     }
 }
 GameItem::~GameItem()
