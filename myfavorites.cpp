@@ -5,7 +5,7 @@
 void MyFavorite::loads(int gameType)
 {
     // Read MyFavorites
-    this->gameType = gameType;
+    this->likesType = gameType;
     QFile file("./likes.source");
     if (!file.open(QIODevice::ReadOnly | QIODevice::Text))
         return;
@@ -26,17 +26,17 @@ void MyFavorite::loads(int gameType)
 void MyFavorite::addLikes(GameInfo info)
 {
     Items.insert(info.name);
-    buff[gameType].append(info);
+    buff[likesType].append(info);
     for (GameGrid* &g : grids)
         g->refresh();
-    if (info.type[0] == gameType)
+    if (info.type[0] == likesType)
         return;
     QFile file("./likes.source");
     if (!file.open(QFile::Append))
         return;
     QTextStream out(&file);
     info.type.clear();
-    info.type.append(gameType);
+    info.type.append(likesType);
     out << info;
     file.close();
 
@@ -54,7 +54,7 @@ bool MyFavorite::isLiked(QString name)
 void MyFavorite::removeLikes(GameInfo info)
 {
     Items.remove(info.name);
-    buff[gameType].removeOne(info);
+    buff[likesType].removeOne(info);
     for (GameGrid* &g : grids)
         g->refresh();
     // write back to file
@@ -62,7 +62,7 @@ void MyFavorite::removeLikes(GameInfo info)
     if (!file.open(QFile::WriteOnly))
         return;
     QTextStream out(&file);
-    for (GameInfo &info : buff[gameType])
+    for (GameInfo &info : buff[likesType])
     {
         if (isLiked(info.name))
         {

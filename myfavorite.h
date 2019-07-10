@@ -11,7 +11,7 @@ class MyFavorite
 {
 public:
     //MyFavorite(); // MyFavorite is a special gameType
-    int gameType;
+    int likesType;
     QSet<QString> Items;
     void loads(int gameTypes);
     void addLikes(GameInfo info);
