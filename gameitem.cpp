@@ -28,10 +28,19 @@ GameItem::GameItem(QWidget *parent, GameInfo info): QWidget(parent), ui(new Ui::
     this->info = info;
     ui->gameName->setText(info.name);
     ui->pushButton->setIconSize(QSize(100, 30));
+    ui->pushButton->setFlat(false);
+    ui->likesButton->setIconSize(QSize(30, 30));
     ui->progressBar->setVisible(false);
     this->is_downloading = false;
     if (myFavorite.isLiked(info.name))
+    {
+        ui->likesButton->setIcon(QPixmap("./heart.png"));
         ui->likesButton->setChecked(true);
+    }
+    else
+    {
+        ui->likesButton->setIcon(QPixmap("./unheart.png"));
+    }
     // set path
     FlashBox_Dir = QDir::home();
     FlashBox_Dir.cd("FlashBox");
@@ -166,11 +175,13 @@ void GameItem::on_likesButton_clicked(bool checked)
     if(checked)
     {
         myFavorite.addLikes(this->info);
+        ui->likesButton->setIcon(QPixmap("./heart.png"));
         //myFavorite.removeLikes(this->info);
     }
     else
     {
         myFavorite.removeLikes(this->info);
+        ui->likesButton->setIcon(QPixmap("./unheart.png"));
     }
 }
 
@@ -178,7 +189,13 @@ void GameItem::refresh_likes()
 {
     // likes ?
     if (myFavorite.isLiked(info.name))
+    {
+        ui->likesButton->setIcon(QPixmap("./heart.png"));
         ui->likesButton->setChecked(true);
+    }
     else
+    {
+        ui->likesButton->setIcon(QPixmap("./unheart.png"));
         ui->likesButton->setChecked(false);
+    }
 }
