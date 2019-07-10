@@ -1,5 +1,5 @@
-#include "gamegird.h"
-#include "ui_gamegird.h"
+#include "gamegrid.h"
+#include "ui_gamegrid.h"
 #include "gameitem.h"
 #include <QWidget>
 #include <QFile>
@@ -16,7 +16,7 @@ extern QVector<QVector<GameInfo>> buff;
 
 
 
-GameGird::GameGird(QWidget *parent, int gameTypeID) :
+GameGrid::GameGrid(QWidget *parent, int gameTypeID) :
     QWidget(parent),
     ui(new Ui::GameGird)
 {
@@ -35,22 +35,22 @@ GameGird::GameGird(QWidget *parent, int gameTypeID) :
     turnToPage(1);
 }
 
-GameGird::~GameGird()
+GameGrid::~GameGrid()
 {
     delete ui;
 }
 
-void GameGird::on_pushButton_clicked()
+void GameGrid::on_pushButton_clicked()
 {
     turnToPage(currentPage - 1);
 }
 
-void GameGird::on_pushButton_2_clicked()
+void GameGrid::on_pushButton_2_clicked()
 {
     turnToPage(currentPage + 1);
 }
 
-void GameGird::turnToPage(int page)
+void GameGrid::turnToPage(int page)
 {
     if (totalPage == 0)
     {
@@ -112,7 +112,7 @@ void GameGird::turnToPage(int page)
     }
 }
 
-void GameGird::keyPressEvent( QKeyEvent * event )
+void GameGrid::keyPressEvent( QKeyEvent * event )
 {
     QTabWidget *w = dynamic_cast<QTabWidget*>(this->parent()->parent());
     switch (event->key())
@@ -135,7 +135,7 @@ void GameGird::keyPressEvent( QKeyEvent * event )
 
 }
 
-void GameGird::AddGame(GameInfo info)
+void GameGrid::AddGame(GameInfo info)
 {
     totalPage = int(ceil(1.0 * buff[gameType].size() / GAME_PER_PAGE));
     ui->label->setText(QString::number(currentPage) + "/" + QString::number(totalPage));
@@ -150,7 +150,7 @@ void GameGird::AddGame(GameInfo info)
    }
 }
 
-void GameGird::refresh()
+void GameGrid::refresh()
 {
     for(GameItem *item : GameList)
     {

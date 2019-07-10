@@ -1,4 +1,5 @@
 #include "myfavorite.h"
+#include "mainwindow.h"
 
 
 void MyFavorite::loads(int gameType)
@@ -26,7 +27,7 @@ void MyFavorite::addLikes(GameInfo info)
 {
     Items.insert(info.name);
     buff[gameType].append(info);
-    for (GameGird* &g : girds)
+    for (GameGrid* &g : grids)
         g->refresh();
     if (info.type[0] == 10)
         return;
@@ -54,7 +55,7 @@ void MyFavorite::removeLikes(GameInfo info)
 {
     Items.remove(info.name);
     buff[gameType].removeOne(info);
-    for (GameGird* &g : girds)
+    for (GameGrid* &g : grids)
         g->refresh();
     // write back to file
     QFile file("./likes.source");

@@ -8,6 +8,7 @@
 
 extern void checkFiles();
 extern void launchGame(QString swf_path);
+
 int main(int argc, char *argv[])
 {
     QApplication a(argc, argv);

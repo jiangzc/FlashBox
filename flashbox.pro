@@ -28,22 +28,22 @@ SOURCES += \
         main.cpp \
         mainwindow.cpp \
     gameitem.cpp \
-    gamegird.cpp \
     tools.cpp \
     game.cpp \
-    myfavorites.cpp
+    myfavorites.cpp \
+    gamegrid.cpp
 
 HEADERS += \
         mainwindow.h \
     gameitem.h \
-    gamegird.h \
     game.h \
-    myfavorite.h
+    myfavorite.h \
+    gamegrid.h
 
 FORMS += \
         mainwindow.ui \
     gameitem.ui \
-    gamegird.ui
+    gamegrid.ui
 
 # Default rules for deployment.
 qnx: target.path = /tmp/$${TARGET}/bin

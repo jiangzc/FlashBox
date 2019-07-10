@@ -10,16 +10,16 @@ namespace Ui {
 class GameGird;
 }
 
-class GameGird : public QWidget
+class GameGrid : public QWidget
 {
     Q_OBJECT
 
 public:
-    explicit GameGird(QWidget *parent, int gameTypeID);
+    explicit GameGrid(QWidget *parent, int gameTypeID);
     void keyPressEvent(QKeyEvent *event);
     void AddGame(GameInfo info);
     void refresh();
-    ~GameGird();
+    ~GameGrid();
 
 private slots:
     void on_pushButton_clicked();

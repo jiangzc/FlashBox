@@ -1,7 +1,7 @@
 ﻿#include "mainwindow.h"
 #include "ui_mainwindow.h"
 #include "gameitem.h"
-#include "gamegird.h"
+#include "gamegrid.h"
 #include <QWidget>
 #include <QFile>
 #include <QVector>
@@ -13,6 +13,7 @@
 
 extern void ReadSourceFile();
 QNetworkAccessManager *manager;
+QVector<GameGrid* > grids;
 MainWindow::MainWindow(QWidget *parent) : QMainWindow(parent), ui(new Ui::MainWindow)
 {
     ui->setupUi(this);
@@ -21,9 +22,9 @@ MainWindow::MainWindow(QWidget *parent) : QMainWindow(parent), ui(new Ui::MainWi
 
     for (int i = 0; i < gamesType.size(); i++)
     {
-        GameGird *g  = new GameGird(ui->tabWidget, i);
+        GameGrid *g  = new GameGrid(ui->tabWidget, i);
         ui->tabWidget->addTab(g, gamesType[i]);
-        myFavorite.girds.append(g);
+        grids.append(g);
         if (i == 10)
             myFavorite.gird = g;
     }
