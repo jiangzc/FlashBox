@@ -23,6 +23,7 @@ MainWindow::MainWindow(QWidget *parent) : QMainWindow(parent), ui(new Ui::MainWi
     {
         GameGird *g  = new GameGird(ui->tabWidget, i);
         ui->tabWidget->addTab(g, gamesType[i]);
+        myFavorite.girds.append(g);
         if (i == 10)
             myFavorite.gird = g;
     }

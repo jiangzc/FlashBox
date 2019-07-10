@@ -68,6 +68,11 @@ GameItem::GameItem(QWidget *parent, GameInfo info): QWidget(parent), ui(new Ui::
 
 void GameItem::refresh()
 {
+    // likes ?
+    if (myFavorite.isLiked(info.name))
+        ui->likesButton->setChecked(true);
+    else
+        ui->likesButton->setChecked(false);
     // picture exist ?
     QFile pic(pic_path);
     if (pic.exists())
@@ -167,4 +172,13 @@ void GameItem::on_likesButton_clicked(bool checked)
     {
         myFavorite.removeLikes(this->info);
     }
+}
+
+void GameItem::refresh_likes()
+{
+    // likes ?
+    if (myFavorite.isLiked(info.name))
+        ui->likesButton->setChecked(true);
+    else
+        ui->likesButton->setChecked(false);
 }

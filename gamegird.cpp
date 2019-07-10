@@ -150,3 +150,12 @@ void GameGird::AddGame(GameInfo info)
    }
 }
 
+void GameGird::refresh()
+{
+    for(GameItem *item : GameList)
+    {
+        if (item != nullptr)
+            item->refresh_likes();
+    }
+}
+

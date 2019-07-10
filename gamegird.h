@@ -18,6 +18,7 @@ public:
     explicit GameGird(QWidget *parent, int gameTypeID);
     void keyPressEvent(QKeyEvent *event);
     void AddGame(GameInfo info);
+    void refresh();
     ~GameGird();
 
 private slots:

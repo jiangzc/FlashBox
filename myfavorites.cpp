@@ -24,6 +24,12 @@ void MyFavorite::loads(int gameType)
 
 void MyFavorite::addLikes(GameInfo info)
 {
+    Items.insert(info.name);
+    buff[gameType].append(info);
+    for (GameGird* &g : girds)
+        g->refresh();
+    if (info.type[0] == 10)
+        return;
     QFile file("./likes.source");
     if (!file.open(QFile::Append))
         return;
@@ -32,8 +38,7 @@ void MyFavorite::addLikes(GameInfo info)
     info.type.append(10);
     out << info;
     file.close();
-    Items.insert(info.name);
-    buff[gameType].append(info);
+
 
     this->gird->AddGame(info);
 }
@@ -49,6 +54,8 @@ void MyFavorite::removeLikes(GameInfo info)
 {
     Items.remove(info.name);
     buff[gameType].removeOne(info);
+    for (GameGird* &g : girds)
+        g->refresh();
     // write back to file
     QFile file("./likes.source");
     if (!file.open(QFile::WriteOnly))

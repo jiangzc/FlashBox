@@ -19,11 +19,13 @@ public:
     ~GameItem();
     bool is_downloading;
     bool swf_exists;
+    void refresh_likes();
 
 private slots:
     void on_pushButton_clicked();
     void finished_pic();
     void finished_swf();
+    void refresh();
     void update_progress(qint64 bytesReceived, qint64 bytesTotal);
 
 
@@ -35,7 +37,6 @@ private:
     QDir FlashBox_Dir;
     QString pic_path;
     QString swf_path;
-    void refresh();
     QNetworkReply *pic_reply;
     QNetworkReply *swf_reply;
 

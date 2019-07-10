@@ -18,6 +18,7 @@ public:
     void removeLikes(GameInfo info);
     bool isLiked(QString info);
     GameGird* gird;
+    QVector<GameGird*> girds;
 };
 extern MyFavorite myFavorite;
 #endif // MYFAVORITE_H
