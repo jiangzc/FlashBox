@@ -7,6 +7,7 @@
 #include <QCoreApplication>
 #include "game.h"
 #include "myfavorite.h"
+#include "myplayed.h"
 
 QVector<QVector<GameInfo>> buff;
 QStringList gamesType;
@@ -25,7 +26,10 @@ void ReadSourceFile()
     gamesType = firstline.split(" ");
     for (int i = 0; i < gamesType.size(); i++)
         buff.append(QVector<GameInfo>());
+    // loads likes.source
     myFavorite.loads(10);
+    // loads played.source
+    myPlayed.loads(9);
     // Read game's content
     while (!in.atEnd())
     {
@@ -45,7 +49,7 @@ void ReadSourceFile()
     filter << "*.source";
     for (QString fileName: dir.entryList(filter))
     {
-        if (fileName == "main.source" || fileName == "likes.source")
+        if (fileName == "main.source" || fileName == "likes.source" || fileName == "played.source")
             continue;
         QFile file(dir.filePath(fileName));
         if (!file.open(QIODevice::ReadOnly | QIODevice::Text))

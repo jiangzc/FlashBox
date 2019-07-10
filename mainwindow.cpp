@@ -9,6 +9,7 @@
 #include <QtDebug>
 #include <cmath>
 #include "myfavorite.h"
+#include "myplayed.h"
 
 
 extern void ReadSourceFile();
@@ -26,6 +27,8 @@ MainWindow::MainWindow(QWidget *parent) : QMainWindow(parent), ui(new Ui::MainWi
         ui->tabWidget->addTab(g, gamesType[i]);
         grids.append(g);
     }
+    myFavorite.grid = grids[10];
+    myPlayed.grid = grids[9];
     ui->tabWidget->currentWidget()->setFocus();
 }
 

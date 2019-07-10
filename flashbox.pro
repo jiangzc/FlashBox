@@ -31,14 +31,16 @@ SOURCES += \
     tools.cpp \
     game.cpp \
     myfavorites.cpp \
-    gamegrid.cpp
+    gamegrid.cpp \
+    myplayed.cpp
 
 HEADERS += \
         mainwindow.h \
     gameitem.h \
     game.h \
     myfavorite.h \
-    gamegrid.h
+    gamegrid.h \
+    myplayed.h
 
 FORMS += \
         mainwindow.ui \

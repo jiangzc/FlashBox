@@ -7,6 +7,7 @@
 #include <QtNetwork>
 #include <string>
 #include "myfavorite.h"
+#include "myplayed.h"
 
 extern QNetworkAccessManager *manager;
 extern void launchGame(QString);
@@ -122,6 +123,7 @@ void GameItem::on_pushButton_clicked()
 {
     if (swf_exists)
     {
+        myPlayed.addPlayed(this->info);
         launchGame(swf_path);
     }
     else

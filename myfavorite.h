@@ -10,13 +10,12 @@
 class MyFavorite
 {
 public:
-    //MyFavorite(); // MyFavorite is a special gameType
-    int likesType;
+    int likesType; // one of the gamesType
     QSet<QString> Items;
     void loads(int gameTypes);
     void addLikes(GameInfo info);
     void removeLikes(GameInfo info);
-    bool isLiked(QString info);
+    bool isLiked(QString name);
     GameGrid* grid;
 
 };
